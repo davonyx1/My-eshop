@@ -10,18 +10,32 @@
         {# il faut préciser le nom de la route du controller dans le {{path}} #}
           <a class="nav-link active" aria-current="page" href="{{ path('default_home') }}">Accueil</a>
         </li>
+
+      {% if not app.user %}
+
         <li class="nav-item">
           <a class="nav-link" href="{{ path('user_register') }}">Inscription</a>
         </li>
-		<li class="nav-item">
-          <a class="nav-link" href="#">Connexion</a>
+		    <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
         </li>
-		<li class="nav-item">
-          <a class="nav-link" href="#">Déconnexion</a>
-        </li>
+
+      {% endif %}
+{# Si un utlisateur N'EST PAS connecté alors on affiche les boutons suivants : #}
+      {% if app.user %}
+
 		<li class="nav-item">
           <a class="nav-link" href="#">Mon Compte</a>
         </li>
+        
+          <li class="nav-item">
+          <a class="nav-link text-danger ms-5" href="{{ path('app_logout') }}">Déconnexion <i class="fa-solid fa-right-from-bracket"></i></a>
+        </li>
+        
+      {% endif %}
+    {# SI l'utili connecté a le ROLE_ADMIN, alors on affiche les boutons suivants :#}
+        {% if is_granted("ROLE_ADMIN") %}
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Espace Admin
@@ -34,6 +48,8 @@
 			<li><hr class="dropdown-divider"></li>
           </ul>
         </li>
+
+      {% endif %}
        
       </ul>
      
