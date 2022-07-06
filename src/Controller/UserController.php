@@ -52,14 +52,15 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            # grace à la methode addFlash() vous pouvez stocker des messages dans la session destonés à etre affichés en front
+            # grace à la methode addFlash() vous pouvez stocker des messages dans la session destinés à etre affichés en front
             #                  label          message
             $this->addFlash('success','vous êtes inscrit avec succès !');
 
             #on peut enfin return et rediriger l'utilisateur là ou on le souhaite
-            return $this->redirectToRoute('default_home');
+            return $this->redirectToRoute('app_login');
             
         }#end if
+        
         #on rend la vue qui contient le formulaire d'inscription
          return $this->render("user/register.html.twig", [
                 'form_register' => $form->createView()

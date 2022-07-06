@@ -1,58 +1,61 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"> MY.SHOP</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-        {# il faut préciser le nom de la route du controller dans le {{path}} #}
-          <a class="nav-link active" aria-current="page" href="{{ path('default_home') }}">Accueil</a>
-        </li>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">MY.SHOP</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {# ============================ PARTIE GAUCHE ============================ #}
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ path('default_home') }}">Accueil</a>
+                </li>
 
-      {% if not app.user %}
+                {# SI un utilisateur N'EST PAS connecté, ALORS on affiche les boutons suivants : #}
+                {%  if not app.user %}
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('user_register') }}">Inscription</a>
-        </li>
-		    <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_register') }}">Inscription</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
 
-      {% endif %}
-{# Si un utlisateur N'EST PAS connecté alors on affiche les boutons suivants : #}
-      {% if app.user %}
+                {%  endif %}
 
-		<li class="nav-item">
-          <a class="nav-link" href="#">Mon Compte</a>
-        </li>
-        
-          <li class="nav-item">
-          <a class="nav-link text-danger ms-5" href="{{ path('app_logout') }}">Déconnexion <i class="fa-solid fa-right-from-bracket"></i></a>
-        </li>
-        
-      {% endif %}
-    {# SI l'utili connecté a le ROLE_ADMIN, alors on affiche les boutons suivants :#}
-        {% if is_granted("ROLE_ADMIN") %}
+                {# SI un utilisateur est connecté, ALORS on affiche les boutons suivants : #}
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mon compte</a>
+                    </li>
+                {% endif %}
+            </ul>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Espace Admin
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
-            <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
-            
-            <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
-			<li><hr class="dropdown-divider"></li>
-          </ul>
-        </li>
+            {# ============================ PARTIE DROITE ============================ #}
+            <ul class="navbar-nav ms-auto">
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link text-danger ms-5" href="{{ path('app_logout') }}">Déconnexion <i class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+            {% endif %}
 
-      {% endif %}
-       
-      </ul>
-     
+            {# SI l'utilisateur connecté à le ROLE_ADMIN, ALORS on affiche les boutons suivants : #}
+            {% if is_granted("ROLE_ADMIN") %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Espace Admin
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{{ path('show_produits') }}">Gestion des produits</a></li>
+                    <li><a class="dropdown-item" href="#">Gestion des utilisateurs</a></li>
+                    <li><a class="dropdown-item" href="#">Gestion des commandes</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                </ul>
+            </li>
+
+            {% endif %}
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
