@@ -38,7 +38,7 @@ class Produit
     private $size;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=10)
      */
     private $collection;
 
