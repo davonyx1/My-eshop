@@ -78,7 +78,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
             "compile": [
-                "php bin/console doctrine:schema:update --force --no-interaction"
+                "php bin/console doctrine:schema:update --force--no-interaction"
             ]
         },
         "post-install-cmd": [
