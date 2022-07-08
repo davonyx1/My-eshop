@@ -14,6 +14,7 @@
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.6",
         "sensio/framework-extra-bundle": "^6.1",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.4.*",
         "symfony/console": "5.4.*",
         "symfony/doctrine-messenger": "5.4.*",
@@ -76,6 +77,9 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "compile": [
+                "php bin/console doctrine:schema:update --force --no-interaction"
+            ]
         },
         "post-install-cmd": [
             "@auto-scripts"
