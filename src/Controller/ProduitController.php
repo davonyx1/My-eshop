@@ -88,7 +88,7 @@ class ProduitController extends AbstractController
             /** @var UploadedFile $photo */
             $photo = $form->get('photo')->getData();
 
-            if ($photo === null) {
+            if ($photo){
 
                $this->handleFile($produit, $photo, $slugger);
             } else {
