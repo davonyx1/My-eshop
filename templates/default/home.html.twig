@@ -1,9 +1,19 @@
 {% extends "base.html.twig" %}
 {# title est ce qui s'affiche dans l'onglet du navigateur ce n'est pas un titre #}
 
-{% block title %} Accueil {% endblock %}
+{% block title %} David Gauran {% endblock %}
 
 
 {% block body %}
-<h1 class="text-center my-4" Bienvenue sur la boutique MY ESHOP</h1>
+
+<h1 class="text-center my-4">Bienvenue sur la boutique MY ESHOP</h1>
+
+{% if app.flashes %}
+        <div class="row">
+            <div class="col-8 mx-auto mt-3">
+                {% include 'include/_flashes.html.twig' %}
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
